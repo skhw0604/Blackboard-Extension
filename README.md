@@ -1,6 +1,6 @@
 # Blackboard Extension
 
-UNIST Blackboard를 더 편리하게 사용할 수 있도록 만든 Chrome 확장 프로그램입니다. 과제와 강의 자료를 한곳에서 관리하고, 시간표와 PDF 보조 기능을 제공합니다.
+Blackboard를 더 편리하게 사용할 수 있도록 만든 Chrome 확장 프로그램입니다. 과제와 강의 자료를 한곳에서 관리하고, 시간표와 PDF 보조 기능을 제공합니다.
 
 ## 주요 기능
 

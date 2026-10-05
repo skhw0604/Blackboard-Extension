@@ -28,7 +28,7 @@ export const setChromeStorageList = async (baseKey: string, values: any[]) => {
         else {
             await setChromeStorage(key, null);
         }
-        if (value === null) break;
+        if (value === null && index >= values.length) break;
         index++;
     }
 }

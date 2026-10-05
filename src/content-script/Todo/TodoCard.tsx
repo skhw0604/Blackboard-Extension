@@ -6,6 +6,7 @@ import ActionIcon, { ActionIconContainer } from "./common/ActionIcon";
 import { useDispatch } from "react-redux";
 import { deleteTodo } from "../../features/lecture_reducer";
 import moment from "moment";
+import { getTodoLink, resolveTodoLink } from "../../features/assessmentNavigation";
 
 const Container = styled.div<{ color: string }>`
 	display: flex;
@@ -81,18 +82,19 @@ function TodoCard({ item, time }: Props) {
 	return (
 		<Container
 			color={item.color}
-			onClick={(e) => {
-				if (!item.linkcode) return;
-				let parent = document.querySelector("#deleteTodo") as HTMLElement;
-				if (parent.contains(e.target as Node)) return;
-				if(item.linkcode.includes("https://") || item.linkcode.includes("http://")) {
-					window.open(item.linkcode, "_blank");
+			onClick={() => {
+				const link = getTodoLink(item);
+				if (!link) return;
+				if (item.courseId && item.contentId) {
+					window.open(link, "_blank");
 					return;
 				}
-				window.open(
-					`https://blackboard.unist.ac.kr/webapps/calendar/launch/attempt/${item.linkcode}`,
-					"_blank"
-				);
+				// Open during the click so the browser permits the new tab.
+				const tab = window.open("about:blank", "_blank");
+				if (!tab) return;
+				void resolveTodoLink(item).then((destination) => {
+					if (!tab.closed) tab.location.replace(destination || link);
+				});
 			}}
 		>
 			<Content>
@@ -116,7 +118,10 @@ function TodoCard({ item, time }: Props) {
 				)}
 			</DueDateContainer>
 
-			<ActionIcon icon={faTrash} onClick={() => deleteTodoItem(item)} id="deleteTodo" />
+			<ActionIcon icon={faTrash} aria-label="과제 삭제" onClick={(event) => {
+				event.stopPropagation();
+				void deleteTodoItem(item);
+			}} />
 		</Container>
 	);
 }

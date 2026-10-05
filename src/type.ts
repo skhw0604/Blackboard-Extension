@@ -19,6 +19,8 @@ export interface Todo {
 	date: number;
 	color: string;
 	linkcode?: string;
+	courseId?: string;
+	contentId?: string;
 }
 export interface BB_alarm {
 	// content: string,

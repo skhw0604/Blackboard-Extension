@@ -60,7 +60,7 @@ const handleBBVersionRedirect = async (url: string) => {
             if (!course_id || !content_id) {
                 return;
             }
-            let newUrl = `https://blackboard.unist.ac.kr/ultra/courses/${course_id[1]}/outline/assessment/${content_id[1]}/overview?courseId=${course_id[1]}`;
+            let newUrl = `https://blackboard.unist.ac.kr/ultra/courses/${course_id[1]}/assessment/${content_id[1]}/overview?courseId=${course_id[1]}`;
             window.location.href = newUrl;
         }
         else if (url.includes("webapps/blackboard/execute/modulepage/view?")) {
